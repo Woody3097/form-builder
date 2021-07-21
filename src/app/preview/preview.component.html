@@ -1,0 +1,6 @@
+<form class="previewClass" [formGroup]="form">
+  <h2>Preview</h2>
+  <app-element [forms]="form" [check]="true" cdkDrag *ngFor="let i of preview" [type]="i.type" [el]="i"></app-element>
+</form>
+
+

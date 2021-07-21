@@ -1,0 +1,21 @@
+<div class="styles">
+  <h1 class="styles__title">General styles</h1>
+  <div class="styles__body" *ngIf="checkStyles">
+    <label for="styleColor">Text color</label>
+    <input id="styleColor" class="styleInput" [(ngModel)]="styles.color"  type="text"> <!-- color -->
+
+    <label for="styleSize">Font size</label>
+    <input id="styleSize" class="styleInput" [(ngModel)]="styles.fontSize" type="text"> <!-- font size -->
+
+    <label for="styleWidth">Width</label>
+    <input id="styleWidth" class="styleInput" [(ngModel)]="styles.width" type="text"> <!-- width -->
+
+    <label for="styleHeight">Height</label>
+    <input id="styleHeight" class="styleInput" [(ngModel)]="styles.height" type="text"> <!-- height -->
+
+    <label for="styleBack">Background color</label>
+    <input id="styleBack" class="styleInput" [(ngModel)]="styles.backgroundColor" type="text"> <!-- background -->
+
+    <button class="styleInput" (click)="changeStyles()">apply</button>
+  </div>
+</div>

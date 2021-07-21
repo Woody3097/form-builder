@@ -1,0 +1,59 @@
+<div [ngSwitch]="check" (click)="setNewStyles()">
+
+<div [formGroup]="forms" *ngSwitchCase="true" [ngSwitch]="type" class="checkTypeTag">
+
+  <mat-form-field  [ngStyle]="style" *ngSwitchCase="'input'" class="example-full-width" appearance="fill">
+    <mat-label>Label</mat-label>
+    <input [formControlName]="el.id.toString()" matInput placeholder="" value="Input">
+  </mat-form-field>
+
+
+  <mat-form-field [ngStyle]="style" *ngSwitchCase="'select'" appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select [formControlName]="el.id.toString()">
+      <mat-option value="test1">Test</mat-option>
+      <mat-option value="test2">Test</mat-option>
+      <mat-option value="test3">Test</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="Submit()" type="submit" [ngStyle]="style" *ngSwitchCase="'button'" mat-raised-button color="primary">Click</button>
+
+  <mat-checkbox [formControlName]="el.id.toString()" [ngStyle]="style" *ngSwitchCase="'checkbox'" class="example-margin">Check me!</mat-checkbox>
+
+  <mat-form-field  [ngStyle]="style" *ngSwitchCase="'textarea'" class="textarea" appearance="fill">
+    <mat-label>Text area</mat-label>
+    <textarea [formControlName]="el.id.toString()" matInput placeholder=""></textarea>
+  </mat-form-field>
+
+  <div *ngSwitchDefault></div>
+</div>
+<div *ngSwitchCase="false" [ngSwitch]="type" class="checkTypeTag">
+  <mat-form-field [ngStyle]="style" *ngSwitchCase="'input'" class="example-full-width" appearance="fill">
+    <mat-label>Label</mat-label>
+    <input [(ngModel)]="currentValue" disabled matInput placeholder="" value="Input">
+  </mat-form-field>
+
+
+  <mat-form-field [ngStyle]="style" *ngSwitchCase="'select'" appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select disabled>
+      <mat-option>
+        Test
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button disabled [ngStyle]="style" *ngSwitchCase="'button'" mat-raised-button color="primary">Click</button>
+
+  <mat-checkbox disabled [ngStyle]="style" *ngSwitchCase="'checkbox'" class="example-margin">Check me!</mat-checkbox>
+
+  <mat-form-field [ngStyle]="style" *ngSwitchCase="'textarea'" class="example-full-width" appearance="fill">
+    <mat-label>Text area</mat-label>
+    <textarea disabled matInput placeholder=""></textarea>
+  </mat-form-field>
+
+  <div *ngSwitchDefault></div>
+</div>
+
+</div>

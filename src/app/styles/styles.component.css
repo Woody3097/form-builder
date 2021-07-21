@@ -1,0 +1,14 @@
+.styles{
+  width: 33vw;
+  height: 100vh;
+  border-right: 1px solid black;
+  text-align: center;
+}
+.styles__body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.styleInput{
+  flex: 0 1 40%;
+}
