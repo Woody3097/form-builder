@@ -1,1 +1,9 @@
-<app-main></app-main>
+<div class="nav">
+  <span>Form Builder</span>
+  <div>
+    <button *ngIf="!_auth.loggedIn()" mat-raised-button color="primary" routerLink="/login">Login</button>
+    <button *ngIf="!_auth.loggedIn()" mat-raised-button color="warn" routerLink="/register">Register</button>
+    <button *ngIf="_auth.loggedIn()" mat-raised-button color="warn" (click)="_auth.logOut()">Log out</button>
+  </div>
+</div>
+<router-outlet></router-outlet>

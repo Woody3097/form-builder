@@ -19,6 +19,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import {mainReducer} from "./Store/Main/Preview/main.reducer";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthService} from "./auth.service";
+import {HttpClientModule} from "@angular/common/http";
+import {LogoutComponent} from "./Auth/logout/logout.component";
+import {RegisterComponent} from "./Auth/register/register.component";
+import {LoginComponent} from "./Auth/login/login.component";
+import {RouterModule} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -28,26 +35,32 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     BuilderComponent,
     PreviewComponent,
     ElementComponent,
-    ElementsListComponent
+    ElementsListComponent,
+    RegisterComponent,
+    LogoutComponent,
+    LoginComponent
   ],
-    imports: [
-        BrowserModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatInputModule,
-        MatButtonModule,
-        NoopAnimationsModule,
-        DragDropModule,
-        StoreModule.forRoot({main: mainReducer}),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-            logOnly: environment.production,
-            autoPause: true
-        }),
-        FormsModule,
-        ReactiveFormsModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatButtonModule,
+    NoopAnimationsModule,
+    DragDropModule,
+    StoreModule.forRoot({main: mainReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true
+    }),
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AppRoutingModule
+  ],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

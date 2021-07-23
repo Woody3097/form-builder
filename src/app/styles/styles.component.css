@@ -1,6 +1,7 @@
 .styles{
   width: 33vw;
-  height: 100vh;
+  height: 86.66vh;
+  overflow: hidden;
   border-right: 1px solid black;
   text-align: center;
 }

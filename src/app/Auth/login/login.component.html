@@ -1,0 +1,25 @@
+<div class="register">
+  <h2>Sign in</h2>
+  <form class="example-form" onsubmit="return false;">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input required type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input [formControl]="passwordFormControl" type="password" required matInput>
+      </mat-form-field>
+      <span style="color: red" *ngIf="currentError.length">
+          {{currentError}}
+      </span>
+    </div>
+    <button (click)="getLoginData()" mat-raised-button color="warn">Primary</button>
+  </form>
+</div>

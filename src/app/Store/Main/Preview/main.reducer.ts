@@ -1,5 +1,5 @@
 import {createReducer, on} from "@ngrx/store";
-import {addPreviewEl, changePreviewEl, clearStyles, deletePreviewEl, setStyles} from "./main.action";
+import {addPreviewEl, changePreviewEl, clearStyles, deletePreviewEl, setPreview, setStyles} from "./main.action";
 
 
 export interface mainState {
@@ -54,5 +54,6 @@ export const mainReducer = createReducer(
     return {...state, preview: tmp}
   }),
   on(setStyles, (state, {obj}) => ({...state, styles: obj})),
-  on(clearStyles, state => ({...state, styles : {id: 0, name: '', value: '', type: '', styles: clearedStyles} }))
+  on(clearStyles, state => ({...state, styles : {id: 0, name: '', value: '', type: '', styles: clearedStyles} })),
+  on(setPreview, (state, {previewArr}) => ({...state, preview : previewArr}))
 )
