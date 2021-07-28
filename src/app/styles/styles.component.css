@@ -13,3 +13,8 @@
 .styleInput{
   flex: 0 1 40%;
 }
+.style__option{
+  border-top: 1px solid black;
+  margin-top: 10px;
+  padding: 10px;
+}

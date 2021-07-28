@@ -1,43 +1,65 @@
-import {Component} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {AuthService} from "../../auth.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AuthService } from "../../auth.service";
+import { setPreview } from "../../Store/Main/Preview/main.action";
+import { authDataState, mainState } from "src/app/shared/interfaces";
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+export class RegisterComponent implements OnInit {
+  form!: FormGroup;
 
-export class RegisterComponent {
-
-  constructor(private _auth: AuthService, private _router: Router) {
-  }
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  passwordFormControl = new FormControl('')
-
-  registerData: any = {
+  registerData: authDataState = {
     password: '',
     email: '',
     previewArr: []
-  }
+  };
 
-  getRegisterData() {
-    this.registerData.password = this.passwordFormControl.value
-    this.registerData.email = this.emailFormControl.value
-    this.registerData.previewArr = []
-    this._auth.registerUser(this.registerData).
-    subscribe(
+  constructor(private _auth: AuthService, private _router: Router, private store: Store<mainState>) {}
+
+  ngOnInit(): void {
+    this.form = new FormGroup({
+      emailFormControl: new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      passwordFormControl: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(25)
+      ])
+    });
+  };
+
+  public get emailControl(): AbstractControl {
+    return <AbstractControl>this.form.get('emailFormControl');
+  };
+  public get passwordControl(): AbstractControl {
+    return <AbstractControl>this.form.get('passwordFormControl');
+  };
+
+  getRegisterData(): void {
+    this.registerData.password = this.passwordControl?.value;
+    this.registerData.email = this.emailControl?.value;
+    if(this.passwordControl?.errors || this.emailControl?.errors){
+      return;
+    }
+    this.registerData.previewArr = [];
+    this._auth.registerUser(this.registerData)
+      .subscribe(
       res => {
-        console.log(res)
-        localStorage.setItem('token', res.token)
-        localStorage.setItem('email', res.email)
-        this._router.navigate(['/app'])
+        this.store.dispatch(setPreview({previewArr: []}));
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('email', res.email);
+        this._router.navigate(['/app']);
       },
       err => console.log(err)
-    )
-  }
+    );
+  };
 }

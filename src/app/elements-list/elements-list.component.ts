@@ -1,25 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import {selectPreview} from "../Store/Main/Preview/main.selector";
-import {mainState} from "../Store/Main/Preview/main.reducer";
-
+import { Component, Input, OnInit } from "@angular/core";
+import { elementState } from "../shared/interfaces";
 
 @Component({
   selector: 'app-elements-list',
   templateUrl: './elements-list.component.html',
   styleUrls: ['./elements-list.component.css']
 })
-
 export class ElementsListComponent implements OnInit {
 
-  @Input() elements: Array<any> = []
-  @Input() preview: Array<any> = []
+  @Input() elements!: Array<elementState>;
+  @Input() preview!: Array<elementState>;
 
-  constructor(private store: Store<mainState>) {
-    this.store.select(selectPreview).subscribe(res => {
-    })
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

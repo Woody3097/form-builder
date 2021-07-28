@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {mainState} from "../Store/Main/Preview/main.reducer";
-import {Store} from "@ngrx/store";
-import {FormService} from "../form.service";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { selectPreview } from "../Store/Main/Preview/main.selector";
+import { FormService } from "../form.service";
+import { elementState, FormServiceElState, mainState } from "../shared/interfaces";
 
 @Component({
   selector: 'app-preview',
@@ -10,22 +11,43 @@ import {FormService} from "../form.service";
   styleUrls: ['./preview.component.css'],
 })
 export class PreviewComponent implements OnInit {
-  @Input() elements: Array<any> = []
-  @Input() preview: Array<any> = []
-
+  @Input() elements!: Array<elementState>;
+  @Input() preview!: Array<elementState>;
   form!: FormGroup;
 
-
   constructor(private fb: FormBuilder, private store: Store<mainState>, private formService: FormService){
-
-    this.form = this.fb.group({})
-    formService.count$.subscribe((res: any) => {
-      if(res.action === 'add')this.form.addControl(res.id.toString(), new FormControl(''))
-      if(res.action === 'del')this.form.removeControl(res.id.toString())
+    formService.count$.subscribe((res: FormServiceElState) => {
+      switch (res.action) {
+        case 'add':
+          this.form.addControl(res.id.toString(), new FormControl(''));
+          break;
+        case 'del':
+          this.form.removeControl(res.id.toString());
+          break;
+      }
+    })
+    this.form = this.fb.group({});
+    store.select(selectPreview).subscribe(res => {
+      this.preview = res;
+    })
+    this.preview.map((el: elementState) => {
+      this.formService.addToForm({ id : el.id, action : 'add' });
     })
   }
 
-  ngOnInit(){
+  ngOnInit(): void {
+    this.submitForm = this.submitForm.bind(this, this.form);
+  }
 
+  submitForm(form: FormGroup): void {
+    let arr = Object.entries(form.controls);
+    this.preview.map((el: any) => {
+     let tmp = arr.find((el1) => {
+        return el1[0] == el.id;
+      })
+      if (tmp) {
+        console.log(el.type, tmp[1].value);
+      }
+    })
   }
 }

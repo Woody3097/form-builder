@@ -18,4 +18,11 @@
 
     <button class="styleInput" (click)="changeStyles()">apply</button>
   </div>
+  <div *ngIf="currentObj.type === 'select'" class="style__option">
+    <h3>Add/Delete option</h3>
+    <input [(ngModel)]="optionAdd" placeholder="Option name to add" type="text">
+    <button (click)="addOption()">Add option</button>
+    <input [(ngModel)]="optionDel" placeholder="Option name to delete" type="text">
+    <button (click)="delOption()">Delete option</button>
+  </div>
 </div>

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import {FormGroup} from "@angular/forms";
+import { Subject } from "rxjs";
+import { FormServiceElState } from "./shared/interfaces";
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormService {
-  public count$ = new Subject<Object>();
+  public count$ = new Subject<FormServiceElState>();
 
-  public addToForm(val: Object) {
+  public addToForm(val: FormServiceElState): void {
     this.count$.next(val);
   }
-  public deleteFromForm(val: Object) {
+  public deleteFromForm(val: FormServiceElState): void {
     this.count$.next(val);
   }
 }

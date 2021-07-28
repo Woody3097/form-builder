@@ -1,23 +1,24 @@
 <div class="builder">
-  <app-preview cdkDropList
-    [ngStyle]="{'width': '50%'}"
-    #previewList="cdkDropList"
-    [cdkDropListData]="preview"
-    [cdkDropListConnectedTo]="[elementsList]"
-    [elements]="elements"
-    [preview]="preview"
-    (cdkDropListDropped)="drop($event, true)">
-  </app-preview>
-
-  <app-elements-list
-    [ngStyle]="{'width': '50%'}"
-    #elementsList="cdkDropList"
-    cdkDropList
-    [cdkDropListData]="elements"
-    [cdkDropListConnectedTo]="[previewList]"
-    [elements]="elements"
-    [preview]="preview"
-    (cdkDropListDropped)="drop($event, false)"
-    [cdkDropListSortPredicate]="sortPredicate">
-  </app-elements-list>
+  <ng-container *ngIf="preview$ | ngrxPush as test">
+    <app-preview cdkDropList
+                 [ngStyle]="{'width': '50%'}"
+                 #previewList="cdkDropList"
+                 [cdkDropListData]="test.concat()"
+                 [cdkDropListConnectedTo]="[elementsList]"
+                 [elements]="elements"
+                 [preview]="test.concat()"
+                 (cdkDropListDropped)="drop($event, true)">
+    </app-preview>
+    <app-elements-list
+      [ngStyle]="{'width': '50%'}"
+      #elementsList="cdkDropList"
+      cdkDropList
+      [cdkDropListData]="elements"
+      [cdkDropListConnectedTo]="[previewList]"
+      [elements]="elements"
+      [preview]="test.concat()"
+      (cdkDropListDropped)="drop($event, false)"
+      [cdkDropListSortPredicate]="sortPredicate">
+    </app-elements-list>
+  </ng-container>
 </div>

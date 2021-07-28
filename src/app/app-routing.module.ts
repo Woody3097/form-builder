@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {LogoutComponent} from "./Auth/logout/logout.component";
-import {RegisterComponent} from "./Auth/register/register.component";
-import {LoginComponent} from "./Auth/login/login.component";
-import {AuthGuard} from "./auth.guard";
-import {MainComponent} from "./main/main.component";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { RegisterComponent } from "./Auth/register/register.component";
+import { LoginComponent } from "./Auth/login/login.component";
+import { AuthGuard } from "./auth.guard";
+import { MainComponent } from "./main/main.component";
 
 const routes: Routes = [
   {
@@ -25,7 +24,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   }
-]
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

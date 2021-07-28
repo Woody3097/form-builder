@@ -6,4 +6,8 @@ mat-form-field,button, label{
 }
 mat-checkbox {
   margin-top: 25px;
+  max-font-size: 20px;
+}
+mat-select {
+  max-font-size: 20px;
 }

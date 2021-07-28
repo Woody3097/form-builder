@@ -1,49 +1,49 @@
-import {Component, ElementRef, forwardRef, HostBinding, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {clearedStyles, elementState, mainState, styleInterface} from "../Store/Main/Preview/main.reducer";
-import {Store} from "@ngrx/store";
-import {setStyles} from "../Store/Main/Preview/main.action";
-import {selectPreview} from "../Store/Main/Preview/main.selector";
-import {FormGroup} from "@angular/forms";
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { setStyles } from "../Store/Main/Preview/main.action";
+import { clearedEl } from "../shared/consts";
+import { elementState, mainState, previewState, styleInterface } from "../shared/interfaces";
 
 @Component({
   selector: 'app-element',
   templateUrl: './element.component.html',
   styleUrls: ['./element.component.css'],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ElementComponent),
+    multi: true
+  }]
 })
-export class ElementComponent implements OnInit {
+export class ElementComponent implements OnInit, ControlValueAccessor {
+  @Input() type!: string;
+  @Input() check!: boolean;
+  @Input() el: elementState = clearedEl;
+  @Input() submit!: any;
+  currentValue!: string;
+  style!: styleInterface;
+  state: previewState | undefined;
+  value!: any;
 
-  @Input() type: string = ''
-  @Input() check: boolean = false
-  @Input() el: elementState = {id: 0, name: '', value: '', type: '', styles: clearedStyles}
-  currentValue: any
-  style: styleInterface = this.el.styles
-
-  @Input()
-  forms!: FormGroup;
-
-  constructor(private store : Store<mainState>) {
-
-  }
+  constructor(private store: Store<mainState>) {}
 
   ngOnInit(): void {
-    this.store.select(selectPreview).subscribe(res => {
-      res.map(el => {
-        if(el.id === this.el.id) {
-          this.style = el.styles
-          this.el = el
-        }
-      })
-    })
+    this.style = this.el.styles;
   }
 
-  setNewStyles(){
-    this.store.dispatch(setStyles({obj : this.el}))
+  setNewStyles(): void {
+    this.store.dispatch(setStyles({ obj: this.el }));
   }
 
-  Submit(){
-    for (let key in this.forms.value){
-      this.forms.value[key] ? console.log(this.forms.value[key]) : null
-    }
+  onChange = (value: any) => {}
+  writeValue(val: string): void {
+    this.value = val
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn
+  }
+  registerOnTouched(fn: any): void {
   }
 }
+
