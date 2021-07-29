@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   form!: FormGroup;
 
   registerData: authDataState = {
+    token: '',
     password: '',
     email: '',
     previewArr: []

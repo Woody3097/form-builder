@@ -1,4 +1,8 @@
 <div class="list">
   <h2>Components</h2>
-  <app-element [check]="false" cdkDrag *ngFor="let i of elements" [type]="i.type"></app-element>
+  <app-element [check]="false"
+               cdkDrag
+               *ngFor="let i of elements"
+               [type]="i.type">
+  </app-element>
 </div>

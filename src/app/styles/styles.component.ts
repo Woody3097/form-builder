@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
 import { selectStyles } from "../Store/Main/Preview/main.selector";
 import { changePreviewEl, setOptions, setStyles } from "../Store/Main/Preview/main.action";
 import { clearedEl, clearedStyles } from "../shared/consts";
@@ -10,15 +11,16 @@ import { elementState, mainState, styleInterface } from "../shared/interfaces";
   templateUrl: './styles.component.html',
   styleUrls: ['./styles.component.css']
 })
-export class StylesComponent implements OnInit {
+export class StylesComponent implements OnInit, OnDestroy {
   styles!: styleInterface;
   checkStyles!: boolean;
   currentObj!: elementState;
   optionAdd!: string;
   optionDel!: string;
+  styles$!: Subscription
   @Input() currentId!: number;
 
-  constructor(private store: Store<mainState>) {}
+  constructor(private store: Store<mainState>) { }
 
   ngOnInit(): void {
     this.styles = clearedStyles;
@@ -26,7 +28,7 @@ export class StylesComponent implements OnInit {
     this.currentObj = clearedEl;
     this.optionAdd = '';
     this.optionDel = '';
-    this.store.select(selectStyles).subscribe((res: elementState) => {
+    this.styles$ = this.store.select(selectStyles).subscribe((res: elementState) => {
       this.currentObj = Object.assign({}, res);
       this.currentId = this.currentObj.id;
       this.styles = Object.assign({}, res.styles);
@@ -58,5 +60,9 @@ export class StylesComponent implements OnInit {
     newOptions.push(this.optionAdd);
     this.store.dispatch(setOptions({ options: newOptions, id: this.currentId }));
     this.optionAdd = '';
+  }
+
+  ngOnDestroy(): void {
+    this.styles$.unsubscribe();
   }
 }

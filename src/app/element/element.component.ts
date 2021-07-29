@@ -24,9 +24,9 @@ export class ElementComponent implements OnInit, ControlValueAccessor {
   currentValue!: string;
   style!: styleInterface;
   state: previewState | undefined;
-  value!: any;
+  value!: string;
 
-  constructor(private store: Store<mainState>) {}
+  constructor(private store: Store<mainState>) { }
 
   ngOnInit(): void {
     this.style = this.el.styles;
@@ -36,7 +36,16 @@ export class ElementComponent implements OnInit, ControlValueAccessor {
     this.store.dispatch(setStyles({ obj: this.el }));
   }
 
-  onChange = (value: any) => {}
+  previewActive(): boolean {
+    return true;
+  }
+
+  elementListActive(): boolean {
+    return false;
+  }
+
+  onChange = (value: any) => { }
+
   writeValue(val: string): void {
     this.value = val
   }

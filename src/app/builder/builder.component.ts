@@ -23,6 +23,14 @@ export class BuilderComponent implements OnInit {
     this.preview$ = this.store.select(selectPreview);
   }
 
+  previewActive(): boolean {
+    return true;
+  }
+
+  elementListActive(): boolean {
+    return false;
+  }
+
   onDropAdd(event: CdkDragDrop<any>): void {
     this.store.dispatch(addPreviewEl({el: event.previousContainer.data[event.previousIndex]}));
     this.formService.addToForm({id : event.previousContainer.data[event.previousIndex].id, action : 'add'});

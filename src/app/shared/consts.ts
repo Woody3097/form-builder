@@ -6,7 +6,7 @@ export const clearedStyles = {
   width: '',
   height: '',
   fontSize: ''
-}
+};
 
 export const clearedEl : elementState = {
   id: 0,
@@ -15,7 +15,7 @@ export const clearedEl : elementState = {
   type: 'input',
   options: [],
   styles : clearedStyles
-}
+};
 
 export const elementListStartValue: Array<elementState> = [
   {
@@ -58,9 +58,9 @@ export const elementListStartValue: Array<elementState> = [
     options: [],
     styles : { ...clearedStyles, backgroundColor: 'purple' }
   }
-]
+];
 
-export const REGISTER_URL = "http://localhost:3000/api/register"
-export const LOGIN_URL = "http://localhost:3000/api/login"
-export const UPDATE_URL = "http://localhost:3000/api/update"
+export const REGISTER_URL = "http://localhost:3000/api/register";
+export const LOGIN_URL = "http://localhost:3000/api/login";
+export const UPDATE_URL = "http://localhost:3000/api/update";
 

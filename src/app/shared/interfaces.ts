@@ -1,6 +1,7 @@
 export interface authDataState {
-  password: string,
+  password?: string,
   email: string,
+  token: string,
   previewArr: previewState
 }
 

@@ -14,7 +14,7 @@ import { elementState, mainState } from "../../../shared/interfaces";
 export const initialState: mainState = {
   preview: [],
   styles: clearedEl
-}
+};
 
 export const mainReducer = createReducer(
   initialState,
@@ -47,4 +47,4 @@ export const mainReducer = createReducer(
     tmp[i] = { ...tmp[i], options: options };
     return { ...state, preview: tmp };
   })
-)
+);

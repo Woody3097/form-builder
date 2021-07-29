@@ -7,7 +7,7 @@
                  [cdkDropListConnectedTo]="[elementsList]"
                  [elements]="elements"
                  [preview]="test.concat()"
-                 (cdkDropListDropped)="drop($event, true)">
+                 (cdkDropListDropped)="drop($event, previewActive())">
     </app-preview>
     <app-elements-list
       [ngStyle]="{'width': '50%'}"
@@ -17,7 +17,7 @@
       [cdkDropListConnectedTo]="[previewList]"
       [elements]="elements"
       [preview]="test.concat()"
-      (cdkDropListDropped)="drop($event, false)"
+      (cdkDropListDropped)="drop($event, elementListActive())"
       [cdkDropListSortPredicate]="sortPredicate">
     </app-elements-list>
   </ng-container>

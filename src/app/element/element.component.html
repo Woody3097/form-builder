@@ -1,57 +1,55 @@
 <div [ngSwitch]="check" (click)="setNewStyles()">
+  <div *ngSwitchCase="previewActive()" [ngSwitch]="type" class="checkTypeTag">
 
-<div *ngSwitchCase="true" [ngSwitch]="type" class="checkTypeTag">
-
-  <mat-form-field [ngStyle]="style" *ngSwitchCase="'input'" class="example-full-width" appearance="fill">
-    <mat-label>Label</mat-label>
-    <input [(ngModel)]="value" (ngModelChange)="onChange($event)" matInput placeholder="" value="Input">
-  </mat-form-field>
-
-
-  <mat-form-field [ngStyle]="style" *ngSwitchCase="'select'" appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select [(ngModel)]="value" (ngModelChange)="onChange($event)">
-      <mat-option *ngFor="let op of el.options" value="{{ op }}">{{ op }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <button (click)="submit()" type="submit" [ngStyle]="style" *ngSwitchCase="'button'" mat-raised-button color="primary">Click</button>
-
-  <mat-checkbox [(ngModel)]="value" (ngModelChange)="onChange($event)" [ngStyle]="style" *ngSwitchCase="'checkbox'" class="example-margin">Check me!</mat-checkbox>
-
-  <mat-form-field  [ngStyle]="style" *ngSwitchCase="'textarea'" class="textarea" appearance="fill">
-    <mat-label>Text area</mat-label>
-    <textarea [(ngModel)]="value" (ngModelChange)="onChange($event)" matInput placeholder=""></textarea>
-  </mat-form-field>
-
-  <div *ngSwitchDefault></div>
-</div>
-<div *ngSwitchCase="false" [ngSwitch]="type" class="checkTypeTag">
-  <mat-form-field [ngStyle]="style" *ngSwitchCase="'input'" class="example-full-width" appearance="fill">
-    <mat-label>Label</mat-label>
-    <input [(ngModel)]="currentValue" disabled matInput placeholder="" value="Input">
-  </mat-form-field>
+    <mat-form-field [ngStyle]="style" *ngSwitchCase="'input'" class="example-full-width" appearance="fill">
+      <mat-label>Label</mat-label>
+      <input [(ngModel)]="value" (ngModelChange)="onChange($event)" matInput value="Input">
+    </mat-form-field>
 
 
-  <mat-form-field [ngStyle]="style" *ngSwitchCase="'select'" appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select disabled>
-      <mat-option>
-        Test
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field [ngStyle]="style" *ngSwitchCase="'select'" appearance="fill">
+      <mat-label>Select</mat-label>
+      <mat-select [(ngModel)]="value" (ngModelChange)="onChange($event)">
+        <mat-option *ngFor="let op of el.options" value="{{ op }}">{{ op }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <button disabled [ngStyle]="style" *ngSwitchCase="'button'" mat-raised-button color="primary">Click</button>
+    <button (click)="submit()" type="submit" [ngStyle]="style" *ngSwitchCase="'button'" mat-raised-button color="primary">Click</button>
 
-  <mat-checkbox disabled [ngStyle]="style" *ngSwitchCase="'checkbox'" class="example-margin">Check me!</mat-checkbox>
+    <mat-checkbox [(ngModel)]="value" (ngModelChange)="onChange($event)" [ngStyle]="style" *ngSwitchCase="'checkbox'" class="example-margin">Check me!</mat-checkbox>
 
-  <mat-form-field [ngStyle]="style" *ngSwitchCase="'textarea'" class="example-full-width" appearance="fill">
-    <mat-label>Text area</mat-label>
-    <textarea disabled matInput placeholder=""></textarea>
-  </mat-form-field>
+    <mat-form-field  [ngStyle]="style" *ngSwitchCase="'textarea'" class="textarea" appearance="fill">
+      <mat-label>Text area</mat-label>
+      <textarea [(ngModel)]="value" (ngModelChange)="onChange($event)" matInput placeholder=""></textarea>
+    </mat-form-field>
 
-  <div *ngSwitchDefault></div>
-</div>
+    <div *ngSwitchDefault></div>
+  </div>
+  <div *ngSwitchCase="elementListActive()" [ngSwitch]="type" class="checkTypeTag">
+    <mat-form-field [ngStyle]="style" *ngSwitchCase="'input'" class="example-full-width" appearance="fill">
+      <mat-label>Label</mat-label>
+      <input [(ngModel)]="currentValue" disabled matInput placeholder="" value="Input">
+    </mat-form-field>
 
+
+    <mat-form-field [ngStyle]="style" *ngSwitchCase="'select'" appearance="fill">
+      <mat-label>Select</mat-label>
+      <mat-select disabled>
+        <mat-option>
+          Test
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button disabled [ngStyle]="style" *ngSwitchCase="'button'" mat-raised-button color="primary">Click</button>
+
+    <mat-checkbox disabled [ngStyle]="style" *ngSwitchCase="'checkbox'" class="example-margin">Check me!</mat-checkbox>
+
+    <mat-form-field [ngStyle]="style" *ngSwitchCase="'textarea'" class="example-full-width" appearance="fill">
+      <mat-label>Text area</mat-label>
+      <textarea disabled matInput></textarea>
+    </mat-form-field>
+
+    <div *ngSwitchDefault></div>
+  </div>
 </div>

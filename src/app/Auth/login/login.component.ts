@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginData: authDataState = {
     password: '',
     email: '',
+    token: '',
     previewArr: []
   };
 
