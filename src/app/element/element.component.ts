@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { setStyles } from "../Store/Main/Preview/main.action";
-import { clearedEl } from "../shared/consts";
-import { elementState, mainState, previewState, styleInterface } from "../shared/interfaces";
+
+import { setStyles } from "src/app/Store/Main/Preview/main.action";
+import { clearedEl } from "src/app/shared/consts";
+import { elementState, mainState, previewState, styleInterface } from "src/app/shared/interfaces";
 
 @Component({
   selector: 'app-element',

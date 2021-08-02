@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+
 import { elementState, previewState, styleInterface } from "../../../shared/interfaces";
 
 export const addPreviewEl = createAction('[Main] addPreviewEl', props<{ el : elementState }>());

@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { CdkDrag, CdkDragDrop, copyArrayItem, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Store } from "@ngrx/store";
-import { addPreviewEl, clearStyles, deletePreviewEl } from "../Store/Main/Preview/main.action";
-import { selectPreview } from "../Store/Main/Preview/main.selector";
-import { FormService } from "../form.service";
-import { elementListStartValue } from "../shared/consts";
-import { elementState, mainState } from "../shared/interfaces";
 import { Observable } from "rxjs";
+
+import { addPreviewEl, clearStyles, deletePreviewEl } from "src/app/Store/Main/Preview/main.action";
+import { selectPreview } from "src/app/Store/Main/Preview/main.selector";
+import { FormService } from "src/app/shared/services/form.service";
+import { elementListStartValue } from "src/app/shared/consts";
+import { elementState, mainState } from "src/app/shared/interfaces";
+
 
 @Component({
   selector: 'app-builder',

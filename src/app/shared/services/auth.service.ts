@@ -3,9 +3,10 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
-import { selectPreview } from "./Store/Main/Preview/main.selector";
-import { authDataState, mainState, previewState } from "./shared/interfaces";
-import { LOGIN_URL, REGISTER_URL, UPDATE_URL } from "./shared/consts";
+
+import { selectPreview } from "../../Store/Main/Preview/main.selector";
+import { authDataState, mainState, previewState } from "../interfaces";
+import { LOGIN_URL, REGISTER_URL, UPDATE_URL } from "../consts";
 
 @Injectable({
   providedIn: 'root'

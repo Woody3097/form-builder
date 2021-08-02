@@ -1,12 +1,12 @@
 <div class="builder">
-  <ng-container *ngIf="preview$ | ngrxPush as test">
+  <ng-container *ngIf="preview$ | ngrxPush as preview">
     <app-preview cdkDropList
                  [ngStyle]="{'width': '50%'}"
                  #previewList="cdkDropList"
-                 [cdkDropListData]="test.concat()"
+                 [cdkDropListData]="preview.concat()"
                  [cdkDropListConnectedTo]="[elementsList]"
                  [elements]="elements"
-                 [preview]="test.concat()"
+                 [preview]="preview.concat()"
                  (cdkDropListDropped)="drop($event, previewActive())">
     </app-preview>
     <app-elements-list
@@ -16,7 +16,7 @@
       [cdkDropListData]="elements"
       [cdkDropListConnectedTo]="[previewList]"
       [elements]="elements"
-      [preview]="test.concat()"
+      [preview]="preview.concat()"
       (cdkDropListDropped)="drop($event, elementListActive())"
       [cdkDropListSortPredicate]="sortPredicate">
     </app-elements-list>

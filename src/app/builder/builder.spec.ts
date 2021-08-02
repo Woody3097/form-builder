@@ -1,7 +1,7 @@
 import {TestBed, ComponentFixture, async} from "@angular/core/testing";
 import {BuilderComponent} from "./builder.component";
 import {Store} from "@ngrx/store";
-import {FormService} from "../form.service";
+import {FormService} from "../shared/services/form.service";
 import {AppModule} from "../app.module";
 
 

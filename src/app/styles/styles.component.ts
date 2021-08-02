@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
-import { selectStyles } from "../Store/Main/Preview/main.selector";
-import { changePreviewEl, setOptions, setStyles } from "../Store/Main/Preview/main.action";
-import { clearedEl, clearedStyles } from "../shared/consts";
-import { elementState, mainState, styleInterface } from "../shared/interfaces";
+
+import { selectStyles } from "src/app/Store/Main/Preview/main.selector";
+import { changePreviewEl, setOptions, setStyles } from "src/app/Store/Main/Preview/main.action";
+import { clearedEl, clearedStyles } from "src/app/shared/consts";
+import { elementState, mainState, styleInterface } from "src/app/shared/interfaces";
 
 @Component({
   selector: 'app-styles',
@@ -12,13 +13,13 @@ import { elementState, mainState, styleInterface } from "../shared/interfaces";
   styleUrls: ['./styles.component.css']
 })
 export class StylesComponent implements OnInit, OnDestroy {
+  @Input() currentId!: number;
   styles!: styleInterface;
   checkStyles!: boolean;
   currentObj!: elementState;
   optionAdd!: string;
   optionDel!: string;
   styles$!: Subscription
-  @Input() currentId!: number;
 
   constructor(private store: Store<mainState>) { }
 

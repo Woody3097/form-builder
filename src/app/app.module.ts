@@ -20,7 +20,7 @@ import { ElementsListComponent } from "./elements-list/elements-list.component";
 import { ElementComponent } from "./element/element.component";
 import { environment } from "../environments/environment";
 import { mainReducer } from "./Store/Main/Preview/main.reducer";
-import { AuthService} from "./auth.service";
+import { AuthService} from "./shared/services/auth.service";
 import { RegisterComponent } from "./Auth/register/register.component";
 import { LoginComponent } from "./Auth/login/login.component";
 import { AppRoutingModule } from "./app-routing.module";

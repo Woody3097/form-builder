@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { FormServiceElState } from "./shared/interfaces";
+import { FormServiceElState } from "../interfaces";
 
 @Injectable({
   providedIn: 'root',

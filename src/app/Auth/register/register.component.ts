@@ -2,9 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { AuthService } from "../../auth.service";
-import { setPreview } from "../../Store/Main/Preview/main.action";
+import { first } from "rxjs/operators";
+
+import { AuthService } from "src/app/shared/services/auth.service";
+import { setPreview } from "src/app/Store/Main/Preview/main.action";
 import { authDataState, mainState } from "src/app/shared/interfaces";
+
 
 
 @Component({
@@ -53,6 +56,7 @@ export class RegisterComponent implements OnInit {
     }
     this.registerData.previewArr = [];
     this._auth.registerUser(this.registerData)
+      .pipe(first())
       .subscribe(
       res => {
         this.store.dispatch(setPreview({previewArr: []}));

@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl,  FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { AuthService } from "../../auth.service";
-import { setPreview } from "../../Store/Main/Preview/main.action";
+import { first } from "rxjs/operators";
+
+import { AuthService } from "src/app/shared/services/auth.service";
+import { setPreview } from "src/app/Store/Main/Preview/main.action";
 import { authDataState, mainState } from "../../shared/interfaces";
 
 @Component({
@@ -46,7 +48,9 @@ export class LoginComponent implements OnInit {
   getLoginData(): void {
     this.loginData.password = this.passwordControl.value;
     this.loginData.email = this.emailControl.value;
-    this._auth.loginUser(this.loginData).subscribe(
+    this._auth.loginUser(this.loginData)
+      .pipe(first())
+      .subscribe(
       res => {
         this.store.dispatch(setPreview({ previewArr: res.previewArr }));
         localStorage.setItem('token', res.token);

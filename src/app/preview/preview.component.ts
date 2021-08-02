@@ -1,22 +1,25 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { selectPreview } from "../Store/Main/Preview/main.selector";
-import { FormService } from "../form.service";
-import { elementState, FormServiceElState, mainState } from "../shared/interfaces";
+
+import { selectPreview } from "src/app/Store/Main/Preview/main.selector";
+import { FormService } from "src/app/shared/services/form.service";
+import { elementState, FormServiceElState, mainState } from "src/app/shared/interfaces";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-preview',
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.css'],
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent implements OnInit, OnDestroy {
   @Input() elements!: Array<elementState>;
   @Input() preview!: Array<elementState>;
   form!: FormGroup;
+  formService$!: Subscription;
 
   constructor(private fb: FormBuilder, private store: Store<mainState>, private formService: FormService){
-    formService.count$.subscribe((res: FormServiceElState) => {
+    this.formService$ = formService.count$.subscribe((res: FormServiceElState) => {
       switch (res.action) {
         case 'add':
           this.form.addControl(res.id.toString(), new FormControl(''));
@@ -49,5 +52,9 @@ export class PreviewComponent implements OnInit {
         console.log(el.type, tmp[1].value);
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.formService$.unsubscribe();
   }
 }
